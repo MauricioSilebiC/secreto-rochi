@@ -1,0 +1,860 @@
+/* ==========================================================================
+   PARA TI ❤️ — hoja de estilos
+   Paleta:
+     --noche-profunda  #0a0f24   fondo principal
+     --noche-media      #161b3d  fondo secundario / degradados
+     --morado            #4b3868  acento frío
+     --rosa               #e9b9cd  acento cálido, texto destacado
+     --dorado               #e3c07f  luces, detalles cálidos
+     --blanco-carta           #f6f1ea  texto sobre fondo oscuro
+     --rojo-sutil               #b23a52  corazones
+   Tipografía:
+     Cormorant Garamond → títulos / eyebrow
+     Lora                    → cuerpo de la carta
+   ========================================================================== */
+
+:root {
+  --noche-profunda: #0a0f24;
+  --noche-media: #131a3d;
+  --noche-clara: #202a55;
+  --morado: #4b3868;
+  --rosa: #e9b9cd;
+  --rosa-suave: #f2d6e2;
+  --dorado: #e3c07f;
+  --blanco-carta: #f6f1ea;
+  --rojo-sutil: #b23a52;
+
+  --fuente-display: 'Cormorant Garamond', serif;
+  --fuente-cuerpo: 'Lora', serif;
+
+  --espaciado-seccion: clamp(4rem, 14vw, 8rem);
+  --ancho-carta: 620px;
+
+  color-scheme: dark;
+}
+
+* { box-sizing: border-box; }
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  * { animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
+}
+
+body {
+  margin: 0;
+  background: var(--noche-profunda);
+  color: var(--blanco-carta);
+  font-family: var(--fuente-cuerpo);
+  overflow-x: hidden;
+  width: 100%;
+}
+
+img { max-width: 100%; display: block; }
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--dorado);
+  outline-offset: 3px;
+}
+
+/* ==========================================================================
+   NIEVE DE FONDO
+   ========================================================================== */
+#snow-canvas {
+  position: fixed;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.55;
+}
+
+/* ==========================================================================
+   PORTADA
+   ========================================================================== */
+.pantalla-completa {
+  position: relative;
+  min-height: 100svh;
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  padding: 2rem 1.25rem;
+  text-align: center;
+}
+
+.cielo-nocturno {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse at 50% 8%, rgba(227, 192, 127, 0.10), transparent 45%),
+    radial-gradient(ellipse at 20% 100%, rgba(108, 60, 172, 0.445), transparent 60%),
+    radial-gradient(ellipse at 80% 100%, rgba(150, 49, 116, 0.45), transparent 60%),
+    linear-gradient(180deg, #050813 0%, #0a0f24 40%, #131a3d 75%, #1b2350 100%);
+  z-index: -2;
+}
+
+.cielo-nocturno::after {
+  /* silueta de montañas / colinas nevadas */
+  content: "";
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  height: 22%;
+  background:
+    linear-gradient(180deg, transparent 0%, rgba(246,241,234,0.06) 100%),
+    polygon-fallback;
+  clip-path: polygon(0% 100%, 0% 60%, 10% 45%, 22% 65%, 35% 30%, 48% 58%, 60% 20%, 74% 55%, 88% 35%, 100% 60%, 100% 100%);
+  background-color: rgba(246, 241, 234, 0.05);
+  border-top: 1px solid rgba(246, 241, 234, 0.08);
+}
+
+.capa-estrellas {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background-image:
+    radial-gradient(1.5px 1.5px at 10% 15%, var(--blanco-carta), transparent),
+    radial-gradient(1px 1px at 25% 8%, var(--blanco-carta), transparent),
+    radial-gradient(1.5px 1.5px at 40% 22%, var(--dorado), transparent),
+    radial-gradient(1px 1px at 60% 10%, var(--blanco-carta), transparent),
+    radial-gradient(1.5px 1.5px at 75% 18%, var(--blanco-carta), transparent),
+    radial-gradient(1px 1px at 88% 6%, var(--dorado), transparent),
+    radial-gradient(1.5px 1.5px at 95% 25%, var(--blanco-carta), transparent),
+    radial-gradient(1px 1px at 15% 35%, var(--blanco-carta), transparent),
+    radial-gradient(1px 1px at 55% 32%, var(--blanco-carta), transparent);
+  background-repeat: no-repeat;
+  animation: centellear 5s ease-in-out infinite alternate;
+}
+
+@keyframes centellear {
+  from { opacity: 0.5; }
+  to { opacity: 1; }
+}
+
+.lirio {
+  position: absolute;
+  color: var(--rosa);
+  width: 70px;
+  height: auto;
+  opacity: 0.5;
+  z-index: 0;
+}
+
+.lirio--esquina-sup-izq { top: -10px; left: -12px; transform: rotate(-12deg); }
+.lirio--esquina-inf-der { bottom: -14px; right: -12px; transform: rotate(172deg) scaleX(-1); color: var(--dorado); opacity: 0.4; }
+
+.portada__contenido {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  max-width: 480px;
+}
+
+.eyebrow {
+  font-family: var(--fuente-display);
+  font-style: italic;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  font-size: 0.7rem;
+  color: var(--rosa-suave);
+  opacity: 0.75;
+  margin: 0 0 0.35rem;
+}
+
+.portada__titulo {
+  font-family: var(--fuente-display);
+  font-weight: 500;
+  font-size: clamp(2.6rem, 12vw, 3.8rem);
+  margin: 0 0 1.5rem;
+  color: var(--blanco-carta);
+  text-shadow: 0 0 30px rgba(227, 192, 127, 0.25);
+}
+
+/* ---- Ilustración principal ---- */
+.ilustracion-principal {
+  position: relative;
+  width: min(78vw, 300px);
+  margin: 0 auto 2rem;
+}
+
+.ilustracion-principal img {
+  width: 100%;
+  border-radius: 2px;
+  filter: drop-shadow(0 18px 40px rgba(0,0,0,0.55));
+}
+
+.lirio--rodea-ilustracion {
+  position: absolute;
+  inset: -12% -18%;
+  width: auto;
+  height: auto;
+  color: var(--rosa);
+  opacity: 0.35;
+  pointer-events: none;
+  z-index: -1;
+}
+
+/* Estado si aún no se ha colocado la imagen: un marco poético en vez de ícono roto */
+.ilustracion-principal--vacia img { display: none; }
+.ilustracion-principal--vacia {
+  aspect-ratio: 3 / 4;
+  border: 1px dashed rgba(246, 241, 234, 0.35);
+  border-radius: 4px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, rgba(75,56,104,0.35), rgba(20,25,55,0.35));
+}
+.ilustracion-principal--vacia::before {
+  content: "❆";
+  font-size: 2.4rem;
+  color: var(--rosa-suave);
+  opacity: 0.5;
+}
+
+/* ---- Botón principal ---- */
+.boton-principal {
+  position: relative;
+  z-index: 2;
+  padding: 1rem 2.2rem;
+  font-family: var(--fuente-display);
+  font-size: 1.15rem;
+  letter-spacing: 0.03em;
+  color: var(--noche-profunda);
+  background: linear-gradient(135deg, var(--rosa-suave), var(--dorado));
+  border-radius: 999px;
+  box-shadow: 0 10px 30px rgba(227, 192, 127, 0.25);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+  min-height: 52px;
+}
+
+.boton-principal:hover,
+.boton-principal:active {
+  transform: translateY(-2px);
+  box-shadow: 0 14px 36px rgba(227, 192, 127, 0.35);
+}
+
+.corazon-boton { margin-left: 0.2rem; }
+
+.portada__pista {
+  margin-top: 1.4rem;
+  font-size: 0.75rem;
+  letter-spacing: 0.08em;
+  color: var(--rosa-suave);
+  opacity: 0.55;
+  font-style: italic;
+}
+
+/* Transición de salida de la portada */
+#portada.portada--saliendo {
+  animation: desvanecerPortada 1.1s ease forwards;
+}
+@keyframes desvanecerPortada {
+  to { opacity: 0; transform: scale(1.02); filter: blur(6px); }
+}
+
+/* ==========================================================================
+   CARTA — contenedor general
+   ========================================================================== */
+.carta {
+  position: relative;
+  z-index: 2;
+  max-width: var(--ancho-carta);
+  margin: 0 auto;
+  padding: var(--espaciado-seccion) 1.4rem;
+  background:
+    radial-gradient(ellipse at 15% 0%, rgba(75,56,104,0.25), transparent 55%),
+    radial-gradient(ellipse at 85% 30%, rgba(75,56,104,0.2), transparent 50%),
+    var(--noche-profunda);
+}
+
+.capitulo {
+  margin-bottom: var(--espaciado-seccion);
+}
+.capitulo:last-child { margin-bottom: 0; }
+
+/* ==========================================================================
+   ENCABEZADO DE LA CARTA
+   ========================================================================== */
+.encabezado-carta {
+  text-align: center;
+  margin: 0 auto 3.2rem;
+  max-width: 52ch;
+}
+
+.encabezado-carta__lugar-fecha {
+  font-family: var(--fuente-cuerpo);
+  font-style: italic;
+  font-size: 0.85rem;
+  letter-spacing: 0.03em;
+  color: var(--rosa-suave);
+  opacity: 0.6;
+  margin: 0 0 1.6rem;
+}
+
+.encabezado-carta__saludo {
+  font-family: var(--fuente-display);
+  font-weight: 500;
+  font-size: clamp(1.5rem, 6vw, 1.9rem);
+  color: var(--blanco-carta);
+  margin: 0;
+}
+
+.divisor-lirio {
+  width: 90px;
+  margin: 0 auto 2.5rem;
+  color: var(--rosa);
+  opacity: 0.5;
+}
+
+.texto-carta {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  max-width: 52ch;
+  margin: 0 auto;
+}
+
+.parrafo {
+  font-family: var(--fuente-cuerpo);
+  font-size: 1.08rem;
+  line-height: 1.85;
+  color: var(--blanco-carta);
+  margin: 0;
+  text-align: left;
+}
+
+.parrafo:first-child {
+  font-family: var(--fuente-display);
+  font-style: italic;
+  font-size: 1.5rem;
+  color: var(--rosa-suave);
+}
+
+/* ---- Revelado progresivo al hacer scroll ---- */
+.revela {
+  opacity: 0;
+  transform: translateY(22px);
+  transition: opacity 1.1s cubic-bezier(0.19, 1, 0.22, 1),
+              transform 1.1s cubic-bezier(0.19, 1, 0.22, 1);
+}
+.revela.en-vista {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* ==========================================================================
+   FOTOGRAFÍAS DENTRO DE LA CARTA
+   ========================================================================== */
+.foto-carta {
+  margin: 2.6rem auto 0;
+  max-width: 420px;
+  text-align: center;
+  position: relative;
+}
+
+.foto-carta--alt { max-width: 340px; }
+
+.foto-carta img {
+  width: 100%;
+  border-radius: 6px;
+  box-shadow: 0 20px 45px rgba(0,0,0,0.5);
+  transform: rotate(-1deg);
+  transition: transform 0.6s ease;
+}
+.foto-carta--alt img { transform: rotate(1.2deg); }
+
+.foto-carta figcaption {
+  margin-top: 0.9rem;
+  font-family: var(--fuente-display);
+  font-style: italic;
+  font-size: 0.95rem;
+  color: var(--rosa-suave);
+  opacity: 0.85;
+}
+
+/* Estado vacío — mientras no se coloque la foto real */
+.foto-carta--vacia img { display: none; }
+.foto-carta--vacia {
+  aspect-ratio: 4/5;
+  max-width: 300px;
+  border: 1px dashed rgba(246,241,234,0.3);
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(160deg, rgba(75,56,104,0.25), rgba(20,25,55,0.25));
+}
+.foto-carta--vacia::before {
+  content: "☙ foto pendiente ❧";
+  font-family: var(--fuente-display);
+  font-style: italic;
+  font-size: 0.85rem;
+  color: var(--rosa-suave);
+  opacity: 0.5;
+}
+
+.foto-carta--final { max-width: 340px; }
+
+/* ==========================================================================
+   SECCIÓN "NUESTROS RECUERDOS"
+   ========================================================================== */
+.seccion-recuerdos { text-align: center; position: relative; }
+
+.easter-egg-gorro { top: 0.4rem; right: 6%; }
+
+.titulo-seccion {
+  font-family: var(--fuente-display);
+  font-weight: 500;
+  font-size: clamp(1.9rem, 7vw, 2.4rem);
+  color: var(--blanco-carta);
+  margin: 0 0 0.6rem;
+}
+
+.lirio--titulo {
+  width: 100px;
+  height: auto;
+  color: var(--rosa);
+  opacity: 0.5;
+  margin: 0 auto 2.6rem;
+  display: block;
+}
+
+.galeria-recuerdos {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2.4rem;
+}
+
+.recuerdo {
+  position: relative;
+  margin: 0;
+}
+.recuerdo img {
+  width: 100%;
+  border-radius: 6px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+}
+
+.recuerdo video {
+  width: 100%;
+  height: auto;
+  display: block;
+  border-radius: 6px;
+  box-shadow: 0 18px 40px rgba(0,0,0,0.45);
+}
+
+.recuerdo--grande { width: min(85%, 360px); transform: rotate(-1.4deg); }
+.recuerdo--mediano { width: min(70%, 300px); transform: rotate(1.6deg); }
+.recuerdo--pequeno { width: min(58%, 240px); transform: rotate(-1deg); }
+.recuerdo:nth-child(even) { align-self: flex-end; }
+.recuerdo:nth-child(odd) { align-self: flex-start; }
+
+.lirio--recuerdo {
+  position: absolute;
+  width: 46px;
+  height: auto;
+  color: var(--rosa);
+  opacity: 0.55;
+  bottom: -14px;
+  left: -14px;
+}
+.lirio--recuerdo-der { left: auto; right: -14px; transform: scaleX(-1); color: var(--dorado); }
+
+/* ==========================================================================
+   CIERRE
+   ========================================================================== */
+.cierre { text-align: center; }
+
+.texto-carta--cierre .parrafo {
+  text-align: center;
+  font-family: var(--fuente-display);
+  font-style: italic;
+  font-size: 1.35rem;
+  color: var(--rosa-suave);
+}
+.texto-carta--cierre .parrafo:first-child { font-size: 1.35rem; }
+
+.texto-carta--final {
+  margin-top: 2.6rem;
+  text-align: center;
+}
+.texto-carta--final .parrafo { text-align: center; }
+
+.mensaje-final {
+  font-family: var(--fuente-display);
+  font-size: 2.4rem !important;
+  color: var(--dorado) !important;
+  font-style: normal !important;
+}
+
+.firma {
+  margin-top: 1rem;
+  font-family: var(--fuente-display);
+  font-style: italic;
+  font-size: 1.1rem;
+  color: var(--rosa-suave);
+  opacity: 0.8;
+}
+
+.lirio--cierre {
+  width: 220px;
+  height: auto;
+  color: var(--rosa);
+  opacity: 0.4;
+  margin: 3rem auto 0;
+  display: block;
+}
+
+/* ==========================================================================
+   BOTÓN DE MÚSICA
+   ========================================================================== */
+/* ==========================================================================
+   REPRODUCTOR DE MÚSICA + VOLUMEN
+   ========================================================================== */
+.reproductor-musica {
+  position: fixed;
+  bottom: 1.1rem;
+  right: 1.1rem;
+  z-index: 50;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 0.6rem;
+}
+
+.boton-musica {
+  padding: 0.6rem 1rem;
+  font-size: 0.85rem;
+  font-family: var(--fuente-display);
+  color: var(--blanco-carta);
+  background: rgba(19, 26, 61, 0.75);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(233, 185, 205, 0.25);
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  transition: transform 0.3s ease, background 0.3s ease;
+  min-height: 44px;
+}
+.boton-musica:hover { transform: translateY(-2px); }
+.boton-musica.reproduciendo {
+  background: rgba(75, 56, 104, 0.85);
+  border-color: var(--dorado);
+}
+
+/* Panel de volumen: pastilla compacta que aparece sobre el botón */
+.panel-volumen {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.55rem 0.9rem;
+  background: rgba(19, 26, 61, 0.85);
+  backdrop-filter: blur(6px);
+  border: 1px solid rgba(233, 185, 205, 0.25);
+  border-radius: 999px;
+  box-shadow: 0 8px 24px rgba(0,0,0,0.35);
+  opacity: 0;
+  transform: translateY(6px) scale(0.96);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+.panel-volumen.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+.volumen-icono {
+  font-size: 1rem;
+  min-width: 28px;
+  min-height: 28px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--rosa-suave);
+}
+
+/* Slider táctil, cómodo en celular (área de toque generosa) */
+.control-volumen {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100px;
+  height: 28px;
+  background: transparent;
+  cursor: pointer;
+}
+
+.control-volumen::-webkit-slider-runnable-track {
+  height: 4px;
+  border-radius: 999px;
+  background: linear-gradient(
+    to right,
+    var(--dorado) 0%,
+    var(--dorado) var(--progreso, 60%),
+    rgba(246, 241, 234, 0.2) var(--progreso, 60%),
+    rgba(246, 241, 234, 0.2) 100%
+  );
+}
+.control-volumen::-moz-range-track {
+  height: 4px;
+  border-radius: 999px;
+  background: rgba(246, 241, 234, 0.2);
+}
+.control-volumen::-moz-range-progress {
+  height: 4px;
+  border-radius: 999px;
+  background: var(--dorado);
+}
+
+.control-volumen::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  margin-top: -7px;
+  border-radius: 50%;
+  background: var(--rosa-suave);
+  border: 2px solid var(--dorado);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+.control-volumen::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: var(--rosa-suave);
+  border: 2px solid var(--dorado);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.4);
+}
+
+/* En pantallas muy angostas, el panel se acomoda para no salirse */
+@media (max-width: 360px) {
+  .control-volumen { width: 80px; }
+}
+
+/* ==========================================================================
+   EASTER EGGS — REFERENCIAS SUTILES A SOUTH PARK
+   Pequeños detalles escondidos: un gorro con pompón, una silueta
+   de montaña nevada tipo "South Park, Colorado" en el cierre,
+   y un cartelito de madera discreto.
+   ========================================================================== */
+.easter-egg-cartel {
+  position: absolute;
+  bottom: 6%;
+  left: 8%;
+  font-family: var(--fuente-display);
+  font-size: 0.6rem;
+  letter-spacing: 0.05em;
+  color: rgba(246, 241, 234, 0.35);
+  transform: rotate(-4deg);
+  border: 1px solid rgba(246, 241, 234, 0.2);
+  padding: 2px 8px;
+  border-radius: 2px;
+  pointer-events: none;
+}
+
+.easter-egg-gorro {
+  position: absolute;
+  width: 26px;
+  opacity: 0.5;
+  color: var(--rojo-sutil);
+}
+
+/* ==========================================================================
+   RESPONSIVE — ESCRITORIO
+   ========================================================================== */
+@media (min-width: 900px) {
+  .carta {
+    padding-left: 3rem;
+    padding-right: 3rem;
+  }
+
+  .parrafo { font-size: 1.18rem; }
+
+  .foto-carta { max-width: 480px; }
+  .foto-carta--alt { max-width: 400px; }
+
+  .galeria-recuerdos {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    align-items: end;
+    gap: 2.4rem 1.6rem;
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .recuerdo { align-self: auto !important; width: 100% !important; }
+  .recuerdo--grande { grid-row: span 2; }
+
+  .ilustracion-principal { width: min(40vw, 340px); }
+
+  .portada__titulo { font-size: 4.4rem; }
+}
+
+@media (min-width: 1300px) {
+  :root { --ancho-carta: 680px; }
+}
+
+/* ==========================================================================
+   ESCENA ANIMADA — siluetas caminando (estilo pueblito nevado)
+   ========================================================================== */
+.escena-nieve {
+  position: relative;
+  height: 70px;
+  max-width: 320px;
+  margin: 0 auto 1.4rem;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(246, 241, 234, 0.12);
+}
+
+.figura {
+  position: absolute;
+  bottom: 4px;
+  width: 34px;
+  height: auto;
+  opacity: 0.75;
+}
+
+.figura--1 {
+  animation: caminar-derecha 9s linear infinite;
+}
+.figura--2 {
+  animation: caminar-izquierda 11s linear infinite;
+  animation-delay: -3s;
+  transform: scaleX(-1);
+}
+
+@keyframes caminar-derecha {
+  from { left: -40px; }
+  to   { left: 100%; }
+}
+@keyframes caminar-izquierda {
+  from { right: -40px; }
+  to   { right: 100%; }
+}
+
+/* balanceo de piernas al caminar */
+.pierna--a { transform-origin: top center; animation: paso 0.5s ease-in-out infinite alternate; }
+.pierna--b { transform-origin: top center; animation: paso 0.5s ease-in-out infinite alternate-reverse; }
+
+@keyframes paso {
+  from { transform: rotate(-14deg); }
+  to   { transform: rotate(14deg); }
+}
+
+/* ==========================================================================
+   ESCENA ANIMADA — personajes caminando + corazones flotando
+   ========================================================================== */
+.escena-nieve {
+  position: relative;
+  height: 90px;
+  max-width: 320px;
+  margin: 0 auto 1.4rem;
+  overflow: hidden;
+  border-bottom: 1px solid rgba(246, 241, 234, 0.12);
+}
+
+.personaje {
+  position: absolute;
+  bottom: 6px;
+  width: 60px;
+  height: auto;
+}
+
+.personaje__img {
+  width: 80%;
+  height: auto;
+  display: block;
+  filter: drop-shadow(0 4px 6px rgba(0,0,0,0.35));
+}
+
+/* ella camina de izquierda a derecha, con leve rebote de pasos */
+.personaje--1 {
+  animation:
+    caminar-derecha 10s linear infinite,
+    rebote-paso 0.45s ease-in-out infinite;
+}
+
+/* tú caminas de derecha a izquierda, espejado */
+.personaje--2 {
+  animation:
+    caminar-izquierda 12s linear infinite,
+    rebote-paso 0.45s ease-in-out infinite;
+  animation-delay: -4s, -0.2s;
+}
+.personaje--2 .personaje__img { transform: scaleX(-1); }
+
+@keyframes caminar-derecha {
+  from { left: -70px; }
+  to   { left: 100%; }
+}
+@keyframes caminar-izquierda {
+  from { right: -70px; }
+  to   { right: 100%; }
+}
+@keyframes rebote-paso {
+  from { transform: translateY(0); }
+  to   { transform: translateY(-4px); }
+}
+
+/* ---- corazones flotando desde cada personaje ---- */
+.corazon-flotante {
+  position: absolute;
+  top: -4px;
+  left: 50%;
+  font-size: 0.7rem;
+  color: var(--rojo-sutil);
+  opacity: 0;
+  pointer-events: none;
+  animation: flotar-corazon 3.2s ease-in infinite;
+}
+
+.corazon-flotante--a { animation-delay: 0s; left: 45%; }
+.corazon-flotante--b { animation-delay: 1.1s; left: 60%; font-size: 0.55rem; }
+.corazon-flotante--c { animation-delay: 2.2s; left: 35%; font-size: 0.6rem; }
+
+@keyframes flotar-corazon {
+  0%   { transform: translate(0, 0) scale(0.7) rotate(-6deg); opacity: 0; }
+  15%  { opacity: 0.9; }
+  55%  { transform: translate(6px, -30px) scale(1) rotate(6deg); opacity: 0.8; }
+  100% { transform: translate(-4px, -52px) scale(0.85) rotate(-4deg); opacity: 0; }
+}
+
+/* humito de una chimenea al fondo, discreto */
+.humo-chimenea {
+  position: absolute;
+  right: 14%;
+  bottom: 40px;
+}
+.humo-chimenea span {
+  position: absolute;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(246, 241, 234, 0.35);
+  animation: subir-humo 4s ease-in infinite;
+}
+.humo-chimenea span:nth-child(2) { animation-delay: 1.3s; }
+.humo-chimenea span:nth-child(3) { animation-delay: 2.6s; }
+
+@keyframes subir-humo {
+  0%   { transform: translate(0, 0) scale(0.6); opacity: 0.5; }
+  100% { transform: translate(6px, -34px) scale(1.3); opacity: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .personaje, .corazon-flotante, .humo-chimenea span { animation: none !important; }
+}
